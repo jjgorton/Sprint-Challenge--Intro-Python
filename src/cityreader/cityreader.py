@@ -89,4 +89,30 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # Go through each city and check to see if it falls within
     # the specified coordinates.
 
+    # range() does NOT work with floats:
+    # sq = [city for city in cities if city.lat in range(
+    #     float(lat1), float(lat2)) and city.lon in range(float(lon1), float(lon2))]
+
+# normalize data
+    if lat1 < lat2:
+        lat_1 = float(lat2)
+        lat_2 = float(lat1)
+    else:
+        lat_1 = float(lat1)
+        lat_2 = float(lat2)
+
+    if lon1 < lon2:
+        lon_1 = float(lon2)
+        lon_2 = float(lon1)
+    else:
+        lon_1 = float(lon1)
+        lon_2 = float(lon2)
+
+    for city in cities:
+        if city.lat <= lat_1 and city.lat >= lat_2 and city.lon <= lon_1 and city.lon >= lon_2:
+            within.append(city)
+            # print(city.name)
+
+    # print(within)
+
     return within
